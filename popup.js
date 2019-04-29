@@ -30,13 +30,12 @@ function loadUrls(arr,i){
                 if (changedInfo.status === "complete") {
                     console.log("complete");
                     chrome.tabs.sendMessage(tabs[0].id, { greeting:"URL LOADED" }, function (response) {
-                        if(response.proto == "hello" && i<arr.length) loadUrls(arr,++i);
+                        if( i<arr.length) loadUrls(arr,++i);
+                        else console.log("hello")
                 });
             }});
         });
-    });
-    
-    
+    });    
 }
    
 });
