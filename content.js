@@ -5,11 +5,11 @@ chrome.runtime.onMessage.addListener(
         setTimeout(() => { sendResponse({ proto: "hello" })},2000); 
     return true;
     });
-var one = ()=>{
+let one = ()=>{
     console.log("function one");
 }
 
 
-var two = () => {
+let two = () => {
     console.log("function two");
 }
