@@ -15,9 +15,11 @@ function loadUrls(arr,i,j){
         let tab = tabs[0];
         //updatinng the tab url
         chrome.tabs.update(tab.id, { url: arr[i][j] },()=>{
-            chrome.tabs.onUpdated.addListener((tabid, changedInfo) =>{
+            chrome.tabs.onUpdated.addListener(function listener(tabid, changedInfo){
                 //listener for when loading is complete
-                if (changedInfo.status === "complete") {
+                if (changedInfo.status === "complete" && tabid === tab.id) {
+                    //remove listener once the page is loaded
+                    chrome.tabs.onUpdated.removeListener(listener);
                     //sending message to the loaded URL
                     chrome.tabs.sendMessage(tabs[0].id, { greeting: "URL LOADED" }, function (response) {
                         //changing URL when both function executed
